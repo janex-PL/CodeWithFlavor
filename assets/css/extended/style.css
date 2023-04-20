@@ -1,0 +1,7 @@
+.post-content p {
+    text-align: justify;
+}
+
+.logo a svg {
+    fill: var(--primary)
+}

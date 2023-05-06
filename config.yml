@@ -21,6 +21,8 @@ params:
   DateFormat: "January 2, 2006"
   defaultTheme: auto
   disableThemeToggle: false
+  assets:
+        disableFingerprinting: true
   
   customCss: ["/style.css"]
 

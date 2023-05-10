@@ -15,7 +15,7 @@ minify:
 params:
   env: production
   title: "Code With Flavor"
-  description: "Learn programming with a dash o cooking"
+  description: "Learn programming with a dash of cooking"
   keywords: [Blog, Programming, Cooking, CSharp, .NET, Microsoft]
   author: "Jan Kliszcz"
   DateFormat: "January 2, 2006"
@@ -52,11 +52,11 @@ params:
     - name: "facebook"
       url: "https://www.facebook.com/codewithflavor" 
     - name: "instagram"
-      url: "https://www.instagram.com/codewithflavor/"
+      url: "https://www.instagram.com/codewithflavor"
     - name: "github"
       url: "https://github.com/janex-PL"
     - name: "linkedin"
-      url: "https://www.linkedin.com/in/jan-kliszcz/"
+      url: "https://www.linkedin.com/company/code-with-flavor"
 
 outputs:
   home:

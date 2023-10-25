@@ -1,7 +1,7 @@
 ---
 title: "Selenium and Docker"
 date: 2023-09-23T13:30:43+02:00
-draft: true
+draft: false
 cover: 
     image: "images/0001-cover.png"
 ---

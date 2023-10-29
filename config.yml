@@ -13,6 +13,7 @@ minify:
   minifyOutput: true
 
 params:
+  baseURL: http://codewithflavor.com/
   env: production
   title: "Code With Flavor"
   description: "Learn programming with a dash of cooking"

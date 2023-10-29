@@ -21,7 +21,7 @@ Well ... before 3rd year began, I've started learning C#. And I've absoultelty *
 
 {{< figure src="me3.jpg" align=center height=400  title=">IT Academic Day '22 at Wrocław University of Science and Technology" alt="Photo of the author holding an Organizer badge during IT Academic Day 2022">}}
 
-I've also been a member of [EKA.NET](https://www.facebook.com/ekadotnet/), a student organization focused on promoting Microsoft technologies, mainly .NET and Azure. During my time there I've helped organizing courses for students, IT Academic Days and a hackathon in cooperation with **PGS Software** (currently as a part of Xebia capital group).
+I've also been a member of [EKA.NET](https://www.facebook.com/ekadotnet/), a student organization focused on promoting Microsoft technologies, mainly .NET and Azure. During my time there I've helped organizing courses for students, IT Academic Days and a hackathon in cooperation with **PGS Software**.
 
 ---
 

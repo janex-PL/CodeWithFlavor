@@ -1,6 +1,6 @@
 ---
 title: "Effortless Selenium Setups in Docker for .NET with Selenium Manager"
-date: 2023-10-29T08:00:00+02:00
+date: 2023-10-29T10:45:00+02:00
 cover: 
     image: "images/0001-cover.png"
 ShowToc: true

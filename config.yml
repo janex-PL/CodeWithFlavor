@@ -21,6 +21,7 @@ params:
   DateFormat: "January 2, 2006"
   defaultTheme: auto
   disableThemeToggle: false
+  favicon: "/favicon.ico"
   assets:
         disableFingerprinting: true
   

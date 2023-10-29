@@ -20,7 +20,7 @@ When we want to build a Docker image running our .NET code, we typically create 
 2. Restore NuGets and publish the app to a folder
 3. Copy the output files into an image with .NET runtime installed
 
-If we need to perform actions in a web browser through code, it's essential to make sure the browser, its necessary libraries, and the matching WebDriver are available. This can result in significantly larger image sizes in order to fullfil these requirements.
+If we need to perform actions in a web browser through code, it's essential to make sure the browser, its necessary libraries, and the matching WebDriver are available. This can result in significantly larger image sizes in order to fulfil these requirements.
 
 To demonstrate this, I've prepared three Docker images:
 - Bare .NET runtime image tagged with version `6.0.22-bookworm-slim` as a base line
@@ -86,7 +86,7 @@ For a long time, developers using Selenium with Chrome browser had no option to 
 
 With the [release of Selenium `4.6.0`](https://www.selenium.dev/blog/2022/selenium-4-6-0-released/), Selenium team introduced Selenium Manager, which in the beginning provided automated driver management. This feature simplified the process of manually installing and guarding the versions of drivers and browsers, but the Chrome browser itself still didn't provide any versioning.
 
-On June 12 2023, [Google announced the Chrome for Testing browser](https://developer.chrome.com/blog/chrome-for-testing/), a special flavor of Chrome dedicated for automation and testing. What's more important, the team had introduced the versioning of the browser binaries. Thanks to this change, developers could now install a specific version from `113.0.5672.0` onwards.
+On June 12 2023, [Google announced the Chrome for Testing browser](https://developer.chrome.com/blog/chrome-for-testing/), a special flavor of Chrome dedicated for automation and testing. What's more important, the team had introduced the versioning of the browser binaries. Thanks to this change, developers could now install a specific version from `113.0.5672.0` onward.
 
 ## And then Selenium dropped the bombshell
 
@@ -133,7 +133,7 @@ docker build --build-arg "dotnet_tag=${DOTNET_TAG}" -t runtime-chrome:$DOTNET_TA
 
 ### Managing browser version from code
 
-Since our runtime image is no longer coupled with the specific version of the browser, we can utilize the new Selenium Manager feature to request any Chrome for Testing browser version from `113` onwards.
+Since our runtime image is no longer coupled with the specific version of the browser, we can utilize the new Selenium Manager feature to request any Chrome for Testing browser version from `113` onward.
 
 I've created a simple program to demonstrate how you can request a specific browser version. Notice that we are not providing a specific version at compile time, which means that you can request any supported version of the browser during runtime.
 
@@ -221,6 +221,6 @@ You’re using Headless Chrome 118.
 ```
 
 ## Summary
-In my opinion, Selenium Manager is a great tool that will vastly improve the dev experience when working with Selenium. Thanks to this tool, working with web browsers has become less problematic and the application is easier to containerize. I'm also glad that Google has finally introduced more accessible version managment with the release of their new Chrome flavor.
+In my opinion, Selenium Manager is a great tool that will vastly improve the dev experience when working with Selenium. Thanks to this tool, working with web browsers has become less problematic and the application is easier to containerize. I'm also glad that Google has finally introduced more accessible version management with the release of their new Chrome flavor.
 
 If you want to test this integration on your own, checkout my [GitHub example repository](https://github.com/janex-PL/DotnetSeleniumDockerRuntimeExample/) where I've gathered all source code used in this article.

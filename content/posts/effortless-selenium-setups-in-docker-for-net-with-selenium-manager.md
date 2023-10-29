@@ -1,12 +1,10 @@
 ---
-title: "Selenium and Docker"
-date: 2023-09-23T13:30:43+02:00
-draft: false
+title: "Effortless Selenium Setups in Docker for .NET with Selenium Manager"
+date: 2023-10-29T08:00:00+02:00
 cover: 
     image: "images/0001-cover.png"
+ShowToc: true
 ---
-
-<!-- I've been using Selenium in my projects for automation, web scraping and even for some minor workarounds not related to website navigation at all. However, because I've been usually deploying my .NET apps using Docker containers, I had to overcome some obstacles. The [introduction of Selenium Manager](https://www.selenium.dev/blog/2022/introducing-selenium-manager/) in version `4.6.0` was a first good step towards Luckily, as of Selenium `4.11.0`, [Selenium Manager implements automated browser management](https://www.selenium.dev/documentation/selenium_manager/#automated-browser-management), which means that Selenium can now automatically download web browser binaries and the matching WebDriver. That actually solves quite some problems! -->
 
 I've been using Selenium in my projects for automation, web scraping and even for some minor workarounds not related to website navigation at all. However, because I've been usually deploying my .NET apps using Docker containers, I had to overcome some obstacles. 
 
@@ -72,9 +70,11 @@ runtime-dependencies               310MB
 runtime-dependencies-chrome        667MB
 ```
 
-The "fully equipped" variant is over 3x larger than the base image and the variant with dependencies installed only is 1.5x larger.
+As you can see, the `runtime-dependencies` and `runtime-dependencies-chrome` images are 1.5x and 3x larger than the base `runtime` image, respectively.
 
-You've probably noticed that there is a step missing in Dockerfiles which would download a ChromeDriver matching the version of installed. The driver itself weighs about 15MB-17MB, so it doesn't affect significantly the size of the final images.
+You've probably noticed that there is a step missing in all Dockerfile which would download a ChromeDriver matching the version of installed. I haven't include this step for two reasons:
+- The driver itself weighs about 15-17 MB, so it doesn't have that much impact on the image size
+- There are packages providing a feature of automatic driver download during the runtime of application i.e. [WebDriverManager.Net](https://github.com/rosolko/WebDriverManager.Net) for .NET applications
 
 ## Versioning nightmare
 
@@ -94,7 +94,7 @@ With the introduction of Selenium `4.11.0`, Selenium team announced that [Seleni
 
 ## Current status of Selenium + Docker
 
-Let's analyze the benefits that all of these changes have brought us i n the context of the issues mentioned earlier.
+Let's analyze the benefits that all of these changes have brought us in the context of the issues mentioned earlier.
 
 ### Reduced base image size
 Since we no longer need to manually install the browser and its driver, we can remove this process from our Dockerfile and leave only the installation of required dependencies. Below is the Dockerfile for .NET runtime image tagged `6.0.22-bookworm-slim ` that can be safely used with Chrome for Testing and Selenium.
@@ -220,4 +220,7 @@ ChromeDriver was started successfully.
 You’re using Headless Chrome 118.
 ```
 
+## Summary
+In my opinion, Selenium Manager is a great tool that will vastly improve the dev experience when working with Selenium. Thanks to this tool, working with web browsers has become less problematic and the application is easier to containerize. I'm also glad that Google has finally introduced more accessible version managment with the release of their new Chrome flavor.
 
+If you want to test this integration on your own, checkout my [GitHub example repository](https://github.com/janex-PL/DotnetSeleniumDockerRuntimeExample/) where I've gathered all source code used in this article.

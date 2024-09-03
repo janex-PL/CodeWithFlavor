@@ -7,7 +7,7 @@ enableRobotsTXT: true
 buildDrafts: false
 buildFuture: false
 buildExpired: false
-
+ 
 minify:
   disableXML: true
   minifyOutput: true
@@ -73,14 +73,18 @@ menu:
       name: "About Me"
       url: /about-me/
       weight: 10
-    - identifier: search
-      name: "Search"
-      url: /search/
-      weight: 20
-    - identifier: categories
-      name: "Categories"
-      url: /categories/
-      weight: 30
+    - identifier: contact
+      name: "Contact"
+      url: /contact/
+      weight: 40
+    # - identifier: search
+    #   name: "Search"
+    #   url: /search/
+    #   weight: 20
+    # - identifier: categories
+    #   name: "Categories"
+    #   url: /categories/
+    #   weight: 30
     
 taxonomies:
   category: categories

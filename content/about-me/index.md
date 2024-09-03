@@ -41,5 +41,3 @@ I hope you'll have a fantastic time reading my blog! Don't forget to follow me o
 - Facebook: [Code with Flavor](https://www.facebook.com/codewithflavor)
 - LinkedIn: [Code with Flavor](https://www.linkedin.com/company/code-with-flavor)
 - GitHub: [janex-PL](https://github.com/janex-PL)
-
-Don't hesitate to get in touch with me via email at contact@codewithflavor.com

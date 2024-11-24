@@ -143,7 +143,7 @@ using OpenQA.Selenium.Chrome;
 
 var chromeOptions = new ChromeOptions();
 // remember about the necessary arguments when running inside container! 
-chromeOptions.AddArguments("--headless","--disable-gpu",
+chromeOptions.AddArguments("--headless=new","--disable-gpu",
     "--no-sandbox", "--disable-dev-shm-usage"); 
 
 while (true)
@@ -179,10 +179,10 @@ while (true)
 Next, we are going to publish our program as a Docker image using the Dockerfile below
 ```dockerfile
 #Change the default runtime to our custom base image
-FROM runtime-chrome:7.0 AS base 
+FROM runtime-chrome:6.0 AS base 
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["SeleniumChromeDocker.csproj", "./"]
 RUN dotnet restore "SeleniumChromeDocker.csproj"
@@ -223,4 +223,4 @@ You’re using Headless Chrome 118.
 ## Summary
 In my opinion, Selenium Manager is a great tool that will vastly improve the dev experience when working with Selenium. Thanks to this tool, working with web browsers has become less problematic and the application is easier to containerize. I'm also glad that Google has finally introduced more accessible version management with the release of their new Chrome flavor.
 
-If you want to test this integration on your own, checkout my [GitHub example repository](https://github.com/janex-PL/DotnetSeleniumDockerRuntimeExample/) where I've gathered all source code used in this article.
+If you want to test this integration on your own, checkout my [GitHub example repository](https://github.com/codewithflavor/DotnetSeleniumDockerRuntimeExample) where I've gathered all source code used in this article along with updates.

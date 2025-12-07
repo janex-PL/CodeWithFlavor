@@ -64,7 +64,7 @@ An autocomplete script is also provided so that the user will fall into the trap
 
 ## Future plans
 
-There's still some few things left to do:
+There's still a few things left to do:
 
 - fixing autocomplete script to handle flags and switches
 - integrate with [openSUSE Build Service](https://build.opensuse.org/) for publicly availble repository with `.rpm` package

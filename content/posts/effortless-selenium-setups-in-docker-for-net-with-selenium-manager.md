@@ -114,7 +114,7 @@ RUN apt-get update \
 We can go one step further and create a more general version of Dockerfile, where you can provide the base image version as a build argument and specify also the default version of the image.
 ```dockerfile
 ARG dotnet_tag=6.0.22-bookworm-slim
-FROM mcr.microsoft.com/dotnet/runtime:$\{dotnet_tag\} AS base
+FROM mcr.microsoft.com/dotnet/runtime:${dotnet_tag} AS base
 
 RUN apt-get update \
   && apt-get install --no-install-recommends -y ca-certificates fonts-liberation libasound2 \

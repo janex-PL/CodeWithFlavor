@@ -8,7 +8,7 @@ ShowToc: true
 Developers like to pretend we write code with precision and intention.
 Reality check: half of software engineering is fixing things caused by our own mistakes.
 
-For years, my most frequent typo has been typing `cocker`instead of `docker`.
+For years, my most frequent typo has been typing `cocker` instead of `docker`.
 
 At first I shrugged it off. Then I started getting irrationally angry about it. And then came the moment every engineer knows too well:
 

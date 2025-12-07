@@ -30,7 +30,7 @@ cocker logs
 cocker compose up
 ```
 
-Every. Single. Time. I had two choices
+Every. Single. Time. I had two choices:
 - ~~Fix my typing~~
 - Burn everything down and create a new binary called `cocker`
 

@@ -67,7 +67,7 @@ An autocomplete script is also provided so that the user will fall into the trap
 There's still a few things left to do:
 
 - fixing autocomplete script to handle flags and switches
-- integrate with [openSUSE Build Service](https://build.opensuse.org/) for publicly availble repository with `.rpm` package
+- integrate with [openSUSE Build Service](https://build.opensuse.org/) for publicly available repository with `.rpm` package
 - create a Powershell version to support Windows environment
 
 Feel free to contribute to the repository!

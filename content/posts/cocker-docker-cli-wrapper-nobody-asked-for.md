@@ -1,6 +1,6 @@
 ---
 title: "Cocker: The Docker CLI Wrapper Nobody Asked For"
-date: 2025-12-08T09:00:00+01:00
+date: 2025-12-08T08:00:00+01:00
 cover: 
     image: "/images/0002-cover.png"
 ShowToc: true

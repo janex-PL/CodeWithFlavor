@@ -1,5 +1,6 @@
 ---
 title: "How expensive is throwing exceptions in .NET - and does it actually matter?"
+description: "A practical benchmark-driven look at exception costs in .NET and when they matter."
 date: 2026-09-07T12:00:00+02:00
 cover:
   image: "/images/0003/cover.png"

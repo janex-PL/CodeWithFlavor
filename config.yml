@@ -16,7 +16,7 @@ params:
   baseURL: http://codewithflavor.com/
   env: production
   title: "Code With Flavor"
-  description: "Learn programming with a dash of cooking"
+  description: "Learn programming with a dash of flavor"
   keywords: [Blog, Programming, Cooking, CSharp, .NET, Microsoft]
   author: "Jan Kliszcz"
   DateFormat: "January 2, 2006"
@@ -49,7 +49,7 @@ params:
 
   homeInfoParams:
     Title: "Code With Flavor 💻🍽️"
-    Content: "Learn programming with a dash of cooking lessons"
+    Content: "Learn programming with a dash of flavor"
 
   socialIcons:
     - name: "facebook"

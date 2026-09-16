@@ -12,5 +12,3 @@ showBreadCrumbs: false
 If you have any questions, comments, need additional information or you want to discuss a business opportunity, feel free to reach out to us via email.
 
 **Email:** contact@codewithflavor.com
-
-

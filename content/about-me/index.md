@@ -17,7 +17,7 @@ I've had my first contact with programming when I was 14 and Minecraft was all t
 
 Later on, when I tried to get into medical studies _(with no success)_, I went to the **Wrocław University of Science and Technology** to study **Automatic Control and Robotics**. After three semesters and an arduous struggle with programming in C/C++, I've decided that there is **no way** I'll be working as a software developer in the future.
 
-Well ... before 3rd year began, I've started learning C#. And I've absoultelty _loved it_.
+Well ... before 3rd year began, I've started learning C#. And I absoultelty _loved it_.
 
 {{< figure src="me3.jpg" align=center height=400  title=">IT Academic Day '22 at Wrocław University of Science and Technology" alt="Photo of the author holding an Organizer badge during IT Academic Day 2022">}}
 

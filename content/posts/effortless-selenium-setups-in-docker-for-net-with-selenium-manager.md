@@ -1,9 +1,12 @@
 ---
 title: "Effortless Selenium Setups in Docker for .NET with Selenium Manager"
 description: "A practical look at using Selenium Manager to simplify Chrome browser setup in Dockerized .NET applications."
+tags: ["dotnet", "selenium", "docker", "chrome", "testing"]
+categories: ["Programming"]
 date: 2023-10-29T10:45:00+02:00
 cover:
   image: "/images/0001-cover.png"
+  alt: "Logos of Docker, .NET, Chrome browser and Selenium"
 ShowToc: true
 ---
 

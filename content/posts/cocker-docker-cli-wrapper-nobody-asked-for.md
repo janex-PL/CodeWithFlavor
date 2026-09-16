@@ -2,8 +2,11 @@
 title: "Cocker: The Docker CLI Wrapper Nobody Asked For"
 date: 2025-12-08T08:00:00+01:00
 description: "A humorous look at building Cocker, an intentionally unnecessary CLI wrapper for fixing repeated Docker command typos."
+tags: ["docker", "cli", "bash", "open-source", "developer-tools"]
+categories: ["Programming", "Projects"]
 cover:
   image: "/images/0002-cover.png"
+  alt: "ASCII art of a chicken"
 ShowToc: true
 ---
 

@@ -1,8 +1,12 @@
 ---
 title: "How expensive is throwing exceptions in .NET - and does it actually matter?"
+description: "A practical benchmark-driven look at exception costs in .NET and when they matter."
+tags: ["dotnet", "csharp", "exceptions", "performance", "benchmarking"]
+categories: ["Programming", "Performance"]
 date: 2026-09-07T12:00:00+02:00
 cover:
   image: "/images/0003/cover.png"
+  alt: "Meme based on Interstellar movie, hero described as result pattern evangelist suggests that throwing new exception is a maneuver"
 ShowToc: true
 math: true
 ---

@@ -1,35 +1,41 @@
 ---
 title: "Effortless Selenium Setups in Docker for .NET with Selenium Manager"
+description: "A practical look at using Selenium Manager to simplify Chrome browser setup in Dockerized .NET applications."
+tags: ["dotnet", "selenium", "docker", "chrome", "testing"]
+categories: ["Programming"]
 date: 2023-10-29T10:45:00+02:00
-cover: 
-    image: "/images/0001-cover.png"
+cover:
+  image: "/images/0001-cover.png"
+  alt: "Logos of Docker, .NET, Chrome browser and Selenium"
 ShowToc: true
 ---
 
-I've been using Selenium in my projects for automation, web scraping and even for some minor workarounds not related to website navigation at all. However, because I've been usually deploying my .NET apps using Docker containers, I had to overcome some obstacles. 
+I've been using Selenium in my projects for automation, web scraping and even for some minor workarounds not related to website navigation at all. However, because I've been usually deploying my .NET apps using Docker containers, I had to overcome some obstacles.
 
-In this article, I'll share my experiences, from handling dependencies and image sizes to navigating versioning challenges. We'll also explore Selenium Manager's latest features and its game-changing impact on Selenium + Docker + .NET integration. 
+In this article, I'll share my experiences, from handling dependencies and image sizes to navigating versioning challenges. We'll also explore Selenium Manager's latest features and its game-changing impact on Selenium + Docker + .NET integration.
 
-_Important note: This article assumes you are using Selenium with Chrome browser. Not every section of the article is applicable if you are using Firefox or Edge._ 
+_Important note: This article assumes you are using Selenium with Chrome browser. Not every section of the article is applicable if you are using Firefox or Edge._
 
 ## Dependencies make the blue whale even bigger!
 
 When we want to build a Docker image running our .NET code, we typically create a Dockerfile that carries out the following steps:
 
 1. Copy source files to an image with .NET SDK installed
-2. Restore NuGets and publish the app to a folder
+2. Restore NuGet packages and publish the app to a folder
 3. Copy the output files into an image with .NET runtime installed
 
 If we need to perform actions in a web browser through code, it's essential to make sure the browser, its necessary libraries, and the matching WebDriver are available. This can result in significantly larger image sizes in order to fulfil these requirements.
 
 To demonstrate this, I've prepared three Docker images:
-- Bare .NET runtime image tagged with version `6.0.22-bookworm-slim` as a base line
+
+- Bare .NET runtime image tagged with version `6.0.22-bookworm-slim` as a baseline
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/runtime:6.0.22-bookworm-slim AS base
 ```
 
 - .NET runtime + required dependencies for launching Chrome browser inside container [from this list](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#chrome-doesnt-launch-on-linux)
+
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/runtime:6.0.22-bookworm-slim AS base
 
@@ -43,6 +49,7 @@ RUN apt-get update \
 ```
 
 - .NET runtime + required dependencies + latest stable version of Google Chrome installed
+
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/runtime:6.0.22-bookworm-slim AS base
 
@@ -54,11 +61,12 @@ RUN apt-get update \
   libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 lsb-release wget xdg-utils curl \
   && apt-get clean
 
-RUN curl -LO  https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \ 
+RUN curl -LO  https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
   && apt-get install --no-install-recommends -y ./google-chrome-stable_current_amd64.deb \
   && rm google-chrome-stable_current_amd64.deb \
   && apt-get clean
 ```
+
 As you can see, the Dockerfiles were written with size optimization in mind by chaining commands in a single `RUN` command in order to reduce the number of layers, installing only the necessary dependencies without any additional recommended packages and cleaning up after install using `apt-get clean` command.
 
 After building the images, we are going to list them along with their size
@@ -72,13 +80,15 @@ runtime-dependencies-chrome        667MB
 
 As you can see, the `runtime-dependencies` and `runtime-dependencies-chrome` images are 1.5x and 3x larger than the base `runtime` image, respectively.
 
-You've probably noticed that there is a step missing in all Dockerfile which would download a ChromeDriver matching the version of installed. I haven't include this step for two reasons:
+You've probably noticed that there is a step missing in all Dockerfiles which would download a ChromeDriver matching the installed browser version. I haven't included this step for two reasons:
+
 - The driver itself weighs about 15-17 MB, so it doesn't have that much impact on the image size
 - There are packages providing a feature of automatic driver download during the runtime of application i.e. [WebDriverManager.Net](https://github.com/rosolko/WebDriverManager.Net) for .NET applications
 
 ## Versioning nightmare
 
 For a long time, developers using Selenium with Chrome browser had no option to download a specific version of the browser from an official source. This could potentially cause some problems:
+
 - you couldn't perform a rollback to the previous Chrome version in case if a critical bug was introduced in a new version, unless you've built a runtime image when the previous version was considered the latest stable and you've applied a sensible image versioning strategy i.e. by not pushing images to the registry with a `latest` tag only
 - updating the version of .NET means that you are automatically going to install the new version of Chrome if a new version was released in the meantime, which is something that may not be desired
 - it's hard to come up with a reasonable versioning format, because now not only you should specify the .NET version and OS used, but also a Chrome version installed. You could also use some custom versioning format, but it would be probably confusing for a typical developer that is used to the tags provided by Microsoft
@@ -97,6 +107,7 @@ With the introduction of Selenium `4.11.0`, Selenium team announced that [Seleni
 Let's analyze the benefits that all of these changes have brought us in the context of the issues mentioned earlier.
 
 ### Reduced base image size
+
 Since we no longer need to manually install the browser and its driver, we can remove this process from our Dockerfile and leave only the installation of required dependencies. Below is the Dockerfile for .NET runtime image tagged `6.0.22-bookworm-slim ` that can be safely used with Chrome for Testing and Selenium.
 
 ```dockerfile
@@ -110,8 +121,11 @@ RUN apt-get update \
   libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 lsb-release wget xdg-utils curl \
   && apt-get clean
 ```
+
 ### Easier .NET version management
+
 We can go one step further and create a more general version of Dockerfile, where you can provide the base image version as a build argument and specify also the default version of the image.
+
 ```dockerfile
 ARG dotnet_tag=6.0.22-bookworm-slim
 FROM mcr.microsoft.com/dotnet/runtime:${dotnet_tag} AS base
@@ -124,6 +138,7 @@ RUN apt-get update \
   libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 lsb-release wget xdg-utils curl \
   && apt-get clean
 ```
+
 Now, when building you can specify the runtime image version for building, but also at the same time you can use the same version to tag the new image
 
 ```shell
@@ -142,15 +157,15 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
 var chromeOptions = new ChromeOptions();
-// remember about the necessary arguments when running inside container! 
+// remember about the necessary arguments when running inside container!
 chromeOptions.AddArguments("--headless=new","--disable-gpu",
-    "--no-sandbox", "--disable-dev-shm-usage"); 
+    "--no-sandbox", "--disable-dev-shm-usage");
 
 while (true)
 {
     Console.Write("Provide a version of Chrome browser you want to launch (type 'q' to quit):");
     var input = Console.ReadLine();
-    
+
     if (string.Equals(input, "q", StringComparison.OrdinalIgnoreCase))
         break;
 
@@ -162,12 +177,12 @@ while (true)
     try
     {
         var driver = new ChromeDriver(chromeService,chromeOptions);
-        
+
         driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
         driver.Navigate().GoToUrl("https://www.whatsmybrowser.org/");
         Console.WriteLine(driver.FindElement(By.TagName("h2")).Text);
-        
+
         driver.Quit();
     }
     catch (Exception e)
@@ -176,10 +191,12 @@ while (true)
     }
 }
 ```
+
 Next, we are going to publish our program as a Docker image using the Dockerfile below
+
 ```dockerfile
 #Change the default runtime to our custom base image
-FROM runtime-chrome:6.0 AS base 
+FROM runtime-chrome:6.0 AS base
 WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
@@ -198,12 +215,16 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "SeleniumChromeDocker.dll"]
 ```
+
 After building, we can run this image in interactive mode and check if we can request any valid version of Chrome for Testing browser
+
 ```shell
 docker build -t selenium-chrome-docker .
 docker run --rm -it selenium-chrome-docker
 ```
+
 Below is an example output. When providing browser version, we can use various different formats such as whole version number, major number or even release channels.
+
 ```
 $ docker run --rm -it selenium-chrome-docker
 Provide a version of Chrome browser you want to launch (type 'q' to quit):114
@@ -212,7 +233,7 @@ You’re using Headless Chrome 114.
 Provide a version of Chrome browser you want to launch (type 'q' to quit):115
 ChromeDriver was started successfully.
 You’re using Headless Chrome 115.
-Provide a version of Chrome browser you want to launch (type 'q' to quit):116.0.5800.0 
+Provide a version of Chrome browser you want to launch (type 'q' to quit):116.0.5800.0
 ChromeDriver was started successfully.
 You’re using Headless Chrome 116.
 Provide a version of Chrome browser you want to launch (type 'q' to quit):stable
@@ -221,6 +242,7 @@ You’re using Headless Chrome 118.
 ```
 
 ## Summary
+
 In my opinion, Selenium Manager is a great tool that will vastly improve the dev experience when working with Selenium. Thanks to this tool, working with web browsers has become less problematic and the application is easier to containerize. I'm also glad that Google has finally introduced more accessible version management with the release of their new Chrome flavor.
 
 If you want to test this integration on your own, checkout my [GitHub example repository](https://github.com/codewithflavor/DotnetSeleniumDockerRuntimeExample) where I've gathered all source code used in this article along with updates.
